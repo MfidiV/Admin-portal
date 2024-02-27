@@ -1,8 +1,9 @@
 {
-   "name": "",
-   "age": 0,
+   "first-name": "",
+   "las-Name": "",
    "city": "",
    "isStudent": false,
    "hobbies": ["reading", "coding", "gaming"]
  }
+ 
  
