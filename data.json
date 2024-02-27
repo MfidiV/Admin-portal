@@ -1,0 +1,8 @@
+{
+   "name": "",
+   "age": 0,
+   "city": "",
+   "isStudent": false,
+   "hobbies": ["reading", "coding", "gaming"]
+ }
+ 
