@@ -15,9 +15,9 @@ The admin panel will include the following features:
 ## Technologies Used
 - **Frontend**:
   - HTML, CSS, JavaScript
-  - Frontend framework (e.g., React, Angular, Vue.js)
+  - Frontend framework (React)
 - **Backend**:
-  - Server-side scripting language (Node.js, Python, PHP)
+  - Server-side scripting language (Node.js, Python)
   - Database management system (MongoDB)
 - **Authentication**:
   - Authentication library or framework (e.g., JWT, OAuth)
