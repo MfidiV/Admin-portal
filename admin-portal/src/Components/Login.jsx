@@ -1,19 +1,46 @@
 import React, { useState } from 'react';
+import '../App.css'
+import { FaUser, FaKey } from 'react-icons/fa'; // Import user and key icons
 
 function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [usernameFocused, setUsernameFocused] = useState(false);
+  const [passwordFocused, setPasswordFocused] = useState(false);
+
 
   return (
-    <div className="Login">
-      <h1>Admin Panel</h1>
-      <form>
-        <label>Username:</label>
-        <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} required />
-        <label>Password:</label>
-        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-        <button type="submit">Login</button>
-      </form>
+    <div className="login-container">
+      <div className="login-form">
+        <h1>Admin</h1>
+        <form>
+          <div className="input-container">
+            <FaUser className="icon" />
+            <input
+                type="text"
+                placeholder={usernameFocused ? '' : 'Username'}
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                onFocus={() => setUsernameFocused(true)}
+                onBlur={() => setUsernameFocused(false)}
+                required
+              />
+          </div>
+          <div className="input-container">
+            <FaKey className="icon" />
+            <input
+                type="password"
+                placeholder={passwordFocused ? '' : 'Password'}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                onFocus={() => setPasswordFocused(true)}
+                onBlur={() => setPasswordFocused(false)}
+                required
+              />
+          </div>
+          <button type="submit">Login</button>
+        </form>
+      </div>
     </div>
   );
 }
