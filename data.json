@@ -1,0 +1,53 @@
+{
+   "admins": [
+     {
+       "id": 1,
+       "username": "admin1",
+       "email": "admin1@example.com",
+       "password": "hashed_password",
+       "roles": ["super_admin", "editor"],
+       "permissions": ["create_user", "delete_user", "edit_post"]
+     },
+     {
+       "id": 2,
+       "username": "admin2",
+       "email": "admin2@example.com",
+       "password": "hashed_password",
+       "roles": ["editor"],
+       "permissions": ["edit_post"]
+     }
+   ],
+   "roles": [
+     {
+       "name": "super_admin",
+       "permissions": ["create_user", "delete_user", "edit_user", "edit_post", "delete_post"]
+     },
+     {
+       "name": "editor",
+       "permissions": ["edit_post", "delete_post"]
+     }
+   ],
+   "permissions": [
+     {
+       "name": "create_user",
+       "description": "Permission to create new users"
+     },
+     {
+       "name": "delete_user",
+       "description": "Permission to delete users"
+     },
+     {
+       "name": "edit_user",
+       "description": "Permission to edit user details"
+     },
+     {
+       "name": "edit_post",
+       "description": "Permission to edit posts"
+     },
+     {
+       "name": "delete_post",
+       "description": "Permission to delete posts"
+     }
+   ]
+ }
+ 
