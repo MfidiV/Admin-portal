@@ -4,7 +4,7 @@
        "id": 1,
        "username": "admin1",
        "email": "admin1@example.com",
-       "password": "hashed_password",
+       "password": "hash",
        "roles": ["super_admin", "editor"],
        "permissions": ["create_user", "delete_user", "edit_post"]
      },
