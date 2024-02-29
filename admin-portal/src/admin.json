@@ -4,7 +4,7 @@
        "id": 1,
        "username": "admin1",
        "email": "admin1@example.com",
-       "password": "hashed_password",
+       "password": "hash",
        "roles": ["super_admin", "editor"],
        "permissions": ["create_user", "delete_user", "edit_post"]
      },
@@ -12,7 +12,7 @@
        "id": 2,
        "username": "admin2",
        "email": "admin2@example.com",
-       "password": "hashed_password",
+       "password": "hashe",
        "roles": ["editor"],
        "permissions": ["edit_post"]
      }

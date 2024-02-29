@@ -16,6 +16,7 @@ function Login() {
 
     if (foundAdmin) {
       console.log("Login successful");
+      setError("successful");
       // Add logic for successful login, such as redirecting to a dashboard
     } else {
       setError("Invalid username or password");
