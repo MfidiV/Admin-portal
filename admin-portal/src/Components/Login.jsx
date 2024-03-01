@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import { FaUser, FaKey } from 'react-icons/fa';
 
-function Login() {
+// eslint-disable-next-line react/prop-types
+function Login({ onLogin }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -10,21 +12,18 @@ function Login() {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:5000/api/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ username, password }),
+      const response = await axios.post('http://localhost:5000/api/login', {
+        username,
+        password,
       });
 
-      if (!response.ok) {
+      if (response.status === 200) {
+        // Call the onLogin function passed from the App component
+        onLogin();
+        console.log("success");
+      } else {
         throw new Error('Login failed');
       }
-
-      const data = await response.json();
-      console.log(data.message);
-      // Add logic for successful login, such as redirecting to a dashboard
     } catch (error) {
       console.error('Error:', error);
       setError('Invalid username or password');

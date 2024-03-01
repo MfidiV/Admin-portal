@@ -1,5 +1,4 @@
 const express = require('express');
-const bcrypt = require('bcrypt');
 const Admin = require('../models/admin');
 
 const router = express.Router();
@@ -10,13 +9,7 @@ router.post('/login', async (req, res) => {
   try {
     const admin = await Admin.findOne({ username });
 
-    if (!admin) {
-      return res.status(401).json({ message: 'Invalid username or password' });
-    }
-
-    const passwordMatch = await bcrypt.compare(password, admin.password);
-
-    if (!passwordMatch) {
+    if (!admin || admin.password !== password) {
       return res.status(401).json({ message: 'Invalid username or password' });
     }
 
