@@ -1,10 +1,13 @@
-import { useState } from 'react'
 import '../src/App.css'
-import Login from './Components/Login'
+// import Login from './Components/Login'
+import Dashboard from './Dashboard'
+ 
+ 
 
 function App() {
   return (
-   <Login/>
+     <Dashboard /> 
+    
   )
 }
 
