@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { FaUser, FaKey } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 
-// eslint-disable-next-line react/prop-types
-function Login({ onLogin }) {
+function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -18,9 +19,9 @@ function Login({ onLogin }) {
       });
 
       if (response.status === 200) {
-        // Call the onLogin function passed from the App component
-        onLogin();
-        console.log("success");
+        console.log("Login successful"); 
+        // Navigate to Home component
+        navigate('/home');
       } else {
         throw new Error('Login failed');
       }
