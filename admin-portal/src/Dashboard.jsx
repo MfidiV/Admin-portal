@@ -12,7 +12,6 @@
      <Sidebar />
      <div className="Dashboard--content">
       <Content/>
-      <ContentHeader/>
       <Profile/>
       </div>
       </div>
