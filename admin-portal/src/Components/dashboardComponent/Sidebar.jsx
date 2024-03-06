@@ -3,9 +3,6 @@ import {
   BiHome,
   BiBookAlt,
   
-  BiSolidReport,
-  BiTask,
-  BiHelpCircle,
   } from "react-icons/bi";
 
   import { MdAutoDelete} from "react-icons/md";
@@ -16,7 +13,7 @@ import {
 
   import "../styles/dashboard.css"
  
-const sidebar = () => {
+const Sidebar = () => {
   return (
   <div className='menu'>
     <div className='logo'>
@@ -60,4 +57,4 @@ const sidebar = () => {
       </div> 
     );
   };
-export default sidebar
+export default Sidebar
