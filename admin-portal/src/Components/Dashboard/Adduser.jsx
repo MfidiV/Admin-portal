@@ -6,6 +6,7 @@ const AddUser = () => {
   const [formData, setFormData] = useState({
     name: "",
     surname: "",
+    idNumber: "", // Fixed typo here
     email: "",
     age: 18, // Default age to 18
   });
@@ -19,7 +20,7 @@ const AddUser = () => {
     e.preventDefault();
 
     // Check if all fields are filled
-    if (!formData.name || !formData.surname || !formData.email || !formData.age) {
+    if (!formData.name || !formData.surname || !formData.email || !formData.age || !formData.idNumber) {
       console.error("Error adding user: All fields are required");
       return;
     }
@@ -38,11 +39,13 @@ const AddUser = () => {
       console.log("User added successfully");
 
       // Optionally, reset the form fields after successful submission
+      // Keep the selected age range after submission
       setFormData({
         name: "",
         surname: "",
+        idNumber: "", // Reset idNumber field
         email: "",
-        age: 18, // Reset age to default
+        age: formData.age,
       });
     } catch (error) {
       console.error("Error adding user:", error.message);
@@ -81,6 +84,20 @@ const AddUser = () => {
           />
         </div>
         <div className="form-group">
+          <label htmlFor="idNumber" className="form-label">
+            ID Number:
+          </label>
+          <input
+            type="text"
+            id="idNumber"
+            name="idNumber"
+            value={formData.idNumber}
+            onChange={handleInputChange}
+            required
+            className="input-text"
+          />
+        </div>
+        <div className="form-group">
           <label htmlFor="email" className="form-label">
             Email:
           </label>
@@ -97,14 +114,14 @@ const AddUser = () => {
         <div className="form-group">
           <div className="age-container">
             <p>Age:</p>
-            <label htmlFor="age_18" className="radio-label">
+            <label htmlFor="age_under_18" className="radio-label">
               Under 18
             </label>
             <input
               type="radio"
-              id="age_18"
+              id="age_under_18"
               name="age"
-              value="<18"
+              value="under_18"
               onChange={handleInputChange}
               required
             />
@@ -115,41 +132,26 @@ const AddUser = () => {
               type="radio"
               id="age_18_65"
               name="age"
-              
-              value="18-65"
+              value="18_65"
               onChange={handleInputChange}
               required
             />
-            <label htmlFor="age_65" className="radio-label">
+            <label htmlFor="age_over_65" className="radio-label">
               Over 65
             </label>
             <input
               type="radio"
-              id="age_65"
+              id="age_over_65"
               name="age"
-              value=">65"
+              value="over_65"
               onChange={handleInputChange}
               required
             />
           </div>
         </div>
-        {/* <div className="form-group">
-          <p>Image:</p>
-          <input
-            type="file"
-            accept="image/*"
-            onChange={handleImageChange}
-            required
-            className="input-file"
-          />
-          <button
-            type="button"
-            className="button"
-            onClick={handleTakeFromCamera}
-          >
-            Take from camera
-          </button>
-        </div> */}
+        
+        {/* Code for handling images */}
+        
         <button type="submit" className="submit-button">
           Submit
         </button>

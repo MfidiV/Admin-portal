@@ -6,8 +6,8 @@ const User = require("../models/User");
 // Add a new user
 router.post("/", async (req, res) => {
   try {
-    const { name, surname, email, age } = req.body;
-    const newUser = new User({ name, surname, email, age });
+    const { name, surname, idNumber,email, age } = req.body;
+    const newUser = new User({ name,surname,idNumber, email, age });
     await newUser.save();
     res.status(201).json(newUser);
   } catch (error) {
