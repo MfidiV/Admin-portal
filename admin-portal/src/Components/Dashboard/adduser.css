@@ -1,0 +1,63 @@
+.container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .form-label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .input-text,
+  .input-file,
+  .button,
+  .radio-label {
+    margin-left: 5px;
+  }
+  
+  .input-text,
+  .input-file,
+  .button {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+  
+  .radio-label {
+    display: inline-block;
+    margin-right: 15px;
+  }
+  
+  .submit-button {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+  }
+  
+  /* Add the modal styling here */
+  .age-container {
+    margin-bottom: 20px;
+  }
+  
+  .input-file {
+    margin-top: 10px; /* Adjust as needed */
+  }
+  
+  .button {
+    margin-top: 10px; /* Adjust as needed */
+  }
+  
