@@ -119,14 +119,16 @@
    display: flex;
    gap: 20px;
    align-items: center;
+   margin-bottom: 10px;
 }
 
-.course-cover{
+ .course-cover{
    background: #fff;
    width: 40px;
    height: 40px;
+   display: flex;
    align-items: center;
-   justify-items: center;
+   justify-content: center;
    border-radius: 50%;
    font-size: 20px;
 }
@@ -138,4 +140,4 @@
 
 .profession{
    color: #969393;
-}
+} 
