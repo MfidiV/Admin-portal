@@ -1,4 +1,5 @@
 // routes/userRoutes.js
+
 const express = require("express");
 const router = express.Router();
 const User = require("../models/User");
@@ -6,8 +7,8 @@ const User = require("../models/User");
 // Add a new user
 router.post("/", async (req, res) => {
   try {
-    const { name, surname, idNumber,email, age } = req.body;
-    const newUser = new User({ name,surname,idNumber, email, age });
+    const { name, surname, idNumber, email, age } = req.body;
+    const newUser = new User({ name, surname, idNumber, email, age });
     await newUser.save();
     res.status(201).json(newUser);
   } catch (error) {
@@ -38,6 +39,17 @@ router.delete("/:id", async (req, res) => {
     res.json({ message: "User deleted successfully" });
   } catch (error) {
     console.error("Error deleting user:", error);
+    res.status(500).json({ message: "An error occurred. Please try again later." });
+  }
+});
+
+// Get all users
+router.get("/", async (req, res) => {
+  try {
+    const users = await User.find({});
+    res.json(users);
+  } catch (error) {
+    console.error("Error fetching users:", error);
     res.status(500).json({ message: "An error occurred. Please try again later." });
   }
 });
