@@ -5,7 +5,7 @@ import useImage from '../../assets/react.svg'
 import {BiBook} from 'react-icons/bi'
 const courses =[
   {
-    title: 'jsvsScript',
+    title: 'javaScript',
     duration:  '6 months',
     icon: <BiBook/>
   },
@@ -36,7 +36,7 @@ const Profile = () => {
         <span className='Profession'>Software Developer</span>
       </div>
 
-      <div className='user-course'>
+      <div className='user-courses'>
         {courses.map(courses=><div className='course'>
           <div className='course-details' >
             <div className='course-cover'>
