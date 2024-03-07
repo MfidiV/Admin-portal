@@ -106,38 +106,3 @@
    border-radius: 10px;
 }
 
-.course{
-   background: #dde6ed;
-   padding: 10px;
-   display: flex;
-   justify-content: space-between;
-   align-items: center;
-   border-radius: 10px;
-}
-
-.course-details{
-   display: flex;
-   gap: 20px;
-   align-items: center;
-   margin-bottom: 10px;
-}
-
- .course-cover{
-   background: #fff;
-   width: 40px;
-   height: 40px;
-   display: flex;
-   align-items: center;
-   justify-content: center;
-   border-radius: 50%;
-   font-size: 20px;
-}
-
-.course .action{
-  font-weight: 900; 
-  font-size: 1.2rem ;
-}
-
-.profession{
-   color: #969393;
-} 

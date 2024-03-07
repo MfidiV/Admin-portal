@@ -7,7 +7,7 @@ const ContentHeader = () => {
       <h1 className='header--title'>Dashboard</h1>
          <div className='header--activity'> 
             <div className='search-box'>
-               <input type="text" placeholder="Search for a user..."/> 
+               <input type="text" placeholder="Search for a course..."/> 
                <BiSearch className='ico'/>
                </div>
 
