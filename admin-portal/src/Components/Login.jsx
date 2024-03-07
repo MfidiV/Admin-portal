@@ -18,6 +18,13 @@ function Login() {
         password,
       });
 
+    if (foundAdmin) {
+      console.log("Login successful");
+      setError("successful");
+      // Add logic for successful login, such as redirecting to a dashboard
+    } else {
+      setError("Invalid username or password");
+
       if (response.status === 200) {
         console.log("Login successful"); 
         // Navigate to Home component
@@ -28,6 +35,7 @@ function Login() {
     } catch (error) {
       console.error('Error:', error);
       setError('Invalid username or password');
+
     }
   };
 

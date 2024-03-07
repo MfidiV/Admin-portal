@@ -10,7 +10,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Login />} /> {/* Assuming the Login component is rendered at the root path */}
-          <Route path="/home" element={<Home />} /> {/* Render the Home component when navigating to /home */}
+          <Route path="/home" element={ <Dashboard /> } /> {/* Render the Home component when navigating to /home */}
         </Routes>
       </Router>
     </div>
