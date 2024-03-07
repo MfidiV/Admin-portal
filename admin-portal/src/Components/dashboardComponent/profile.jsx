@@ -43,9 +43,11 @@ const Profile = () => {
               {courses.icon}
             </div>
             <div  className="course-name">
-                { courses.title }
+                <h5 className='title'>{ courses.title }</h5>
+                <span  className='duration'>Duration : { courses.duration }</span>
             </div>
           </div>
+          <div className='action'>:</div>
         </div>)}
       </div>
     </div>

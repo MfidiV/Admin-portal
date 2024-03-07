@@ -106,3 +106,28 @@
    border-radius: 10px;
 }
 
+.course{
+   background: #dde6ed;
+   padding: 10px;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   border-radius: 10px;
+}
+
+.course-details{
+   display: flex;
+   gap: 20px;
+   align-items: center;
+}
+
+.course-cover{
+   background: #fff;
+   width: 40px;
+   height: 40px;
+   align-items: center;
+   justify-items: center;
+   border-radius: 50%;
+   font-size: 20px;
+}
+
