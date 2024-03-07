@@ -9,6 +9,12 @@ const Users = [
       status:"Active 2h ago",
       qualification: "BSc in physics",
    },
+   {
+      Image: image1,
+      name:"Vuyo",
+      status:"Active 5h ago",
+      qualification: "Comp Sci",
+   },
 ];
 const UserList = () => {
   return (
@@ -24,11 +30,11 @@ const UserList = () => {
       <div className='list--container'>
          {Users.map((user) =>(
             <div className= "list">
-               <div className='User--details'>
+               <div className='user--details'>
                <img src={user.Image} alt={user.name}/>  
                <h2>{user.name}</h2> 
               </div>
-              <span>{user.name}</span>
+            
               <span>{user.status}</span>
               <span>{user.qualification}</span>
               
