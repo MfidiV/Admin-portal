@@ -7,7 +7,7 @@ const course = [
       icon: <BiLogoHtml5 />,
    },
    {
-      title: "Data Structures & Algorithms",
+      title: "Data Structures  ",
       url:'https://www.freecodecamp.org/learn/data-structures-algorithms',
       icon: <BiLogoHtml5 />
    },
@@ -32,7 +32,7 @@ const Card = () => {
                <div className="card">
                <div className='card--cover'>{item.icon}</div>
                <div className='card--title'> 
-               <h2>item.title</h2>
+               <h2>{item.title}</h2>
                </div>
                </div>
             ))}
