@@ -21,7 +21,7 @@ function Login() {
       if (response.status === 200) {
         console.log("Login successful");
         // Navigate to Home component
-        navigate('/Dashboard');
+        navigate('/dashboard');
       } else {
         setError("Invalid username or password");
         throw new Error('Login failed');
