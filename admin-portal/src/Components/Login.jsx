@@ -1,27 +1,36 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import { FaUser, FaKey } from 'react-icons/fa';
-import adminData from '../admin.json'; // Import admin data from JSON file
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-
-    const foundAdmin = adminData.admins.find(
-      (admin) => admin.username === username && admin.password === password
-    );
-
-    if (foundAdmin) {
-      console.log("Login successful");
-      setError("successful");
-      // Add logic for successful login, such as redirecting to a dashboard
-    } else {
-      setError("Invalid username or password");
+  
+    try {
+      const response = await axios.post('http://localhost:5000/api/login', {
+        username,
+        password,
+      });
+  
+      if (response.status === 200) {
+        console.log("Login successful");
+        // Navigate to Home component
+        navigate('/dashboard');
+      } else {
+        setError("Invalid username or password");
+        throw new Error('Login failed');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      setError('Invalid username or password');
     }
-  };
+  }
 
   return (
     <div className="login-container">

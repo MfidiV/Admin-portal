@@ -46,3 +46,21 @@
    background: #dde6ed;
    border-radius: 10px;
  }
+
+ /* Style for the user table */
+.user-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.user-table th,
+.user-table td {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+.user-table th {
+  background-color: #f2f2f2;
+}
