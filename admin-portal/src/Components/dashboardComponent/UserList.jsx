@@ -1,22 +1,30 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import "../styles/UserList.css"
-import image1 from '../../assets/Bora.png';
+import axios from 'axios';
 
-const Users = [
-   {
-      Image: image1,
-      name:"Bora",
-      status:"Active 2h ago",
-      qualification: "BSc in physics",
-   },
-   {
-      Image: image1,
-      name:"Vuyo",
-      status:"Active 5h ago",
-      qualification: "Comp Sci",
-   },
-];
+
 const UserList = () => {
+
+   const [users, setUsers] = useState([]);
+ 
+   useEffect(() => {
+     const fetchData = async () => {
+       try {
+         const response = await axios.get('http://localhost:5000/api/users');
+         if (response.headers['content-type'] && response.headers['content-type'].startsWith('text/html')) {
+           console.error('Unexpected response format from API. Response data is an HTML document.');
+         } else {
+           setUsers(response.data);
+         }
+       } catch (error) {
+         console.error('Error fetching user data:', error);
+       }
+     };
+   
+     fetchData();
+   
+   }, []);
+   
   return (
     <div className='User--List'> 
     <div className='list--header'>
@@ -27,21 +35,28 @@ const UserList = () => {
       
       </select>
       </div>
-      <div className='list--container'>
-         {Users.map((user) =>(
-            <div className= "list">
-               <div className='user--details'>
-               <img src={user.Image} alt={user.name}/>  
-               <h2>{user.name}</h2> 
-              </div>
-            
-              <span>{user.status}</span>
-              <span>{user.qualification}</span>
-              
-              <span className='user--todo'> :</span>
-              </div>
+      <table className="user-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Surname</th>
+              <th>ID Number</th>
+              <th>Email</th>
+              <th>Age</th>
+            </tr>
+          </thead>
+          <tbody>
+            {users.map(user => (
+              <tr key={user._id}>
+                <td>{user.name}</td>
+                <td>{user.surname}</td>
+                <td>{user.idNumber}</td>
+                <td>{user.email}</td>
+                <td>{user.age}</td>
+              </tr>
             ))}
-      </div>
+          </tbody>
+        </table>
     </div>
   );
 };

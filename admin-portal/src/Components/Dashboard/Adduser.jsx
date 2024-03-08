@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import "./adduser.css";
 import axios from "axios";
 
+
+
 const AddUser = () => {
+  const [showSuccessModal, setShowSuccessModal] = useState(false); // Moved inside the component
+
   const [formData, setFormData] = useState({
     name: "",
     surname: "",
@@ -37,7 +41,8 @@ const AddUser = () => {
       }
 
       console.log("User added successfully");
-
+      setShowSuccessModal(true);
+      
       // Optionally, reset the form fields after successful submission
       // Keep the selected age range after submission
       setFormData({
@@ -156,7 +161,18 @@ const AddUser = () => {
           Submit
         </button>
       </form>
+      {showSuccessModal && (
+        <div className="success-modal">
+          <div className="success-modal-content">
+            <span className="close" onClick={() => setShowSuccessModal(false)}>
+              &times;
+            </span>
+            <p>User added successfully!</p>
+          </div>
+        </div>
+      )}
     </div>
+   
   );
 };
 

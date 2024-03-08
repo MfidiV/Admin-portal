@@ -3,19 +3,19 @@ import { BiLogoHtml5, BiBuilding, BiAccessibility, BiAbacus } from 'react-icons/
 
 const course = [
    {
-      title: 'Web Dev',
-      icon: <BiLogoHtml5 />,
+      title: 'Web Development',
+      // icon: <BiLogoHtml5 />,
    },
    {
       title: "Data Structures  ",
       url:'https://www.freecodecamp.org/learn/data-structures-algorithms',
-      icon: <BiLogoHtml5 />
+      // icon: <BiLogoHtml5 />
    },
 
    {
       title:  'Software Engineering',
       //url: '',
-      icon: <BiBuilding />
+      // icon: <BiBuilding />
    },
 
    {
@@ -30,7 +30,7 @@ const Card = () => {
   return ( <div className='card-container'> 
             {course.map((item) => (
                <div className="card">
-               <div className='card--cover'>{item.icon}</div>
+               {/* <div className='card--cover'>{item.icon}</div> */}
                <div className='card--title'> 
                <h2>{item.title}</h2>
                </div>

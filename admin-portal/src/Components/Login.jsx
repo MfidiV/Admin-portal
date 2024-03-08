@@ -11,33 +11,26 @@ function Login() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
+  
     try {
       const response = await axios.post('http://localhost:5000/api/login', {
         username,
         password,
       });
-
-    if (foundAdmin) {
-      console.log("Login successful");
-      setError("successful");
-      // Add logic for successful login, such as redirecting to a dashboard
-    } else {
-      setError("Invalid username or password");
-
+  
       if (response.status === 200) {
-        console.log("Login successful"); 
+        console.log("Login successful");
         // Navigate to Home component
-        navigate('/home');
+        navigate('/dashboard');
       } else {
+        setError("Invalid username or password");
         throw new Error('Login failed');
       }
     } catch (error) {
       console.error('Error:', error);
       setError('Invalid username or password');
-
     }
-  };
+  }
 
   return (
     <div className="login-container">
