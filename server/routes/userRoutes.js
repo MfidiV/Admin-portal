@@ -22,7 +22,8 @@ router.post("/", async (req, res) => {
 router.put("/:id", async (req, res) => {
   try {
     const { name, surname, email, age, image } = req.body;
-    const updatedUser = await User.findByIdAndUpdate(req.params.id, { name, surname, email, age, image }, { new: true });
+    const updatedUser = await User.findByIdAndUpdate(req.params.
+      idNumber, { name, surname, email, age, image }, { new: true });
     res.json(updatedUser);
   } catch (error) {
     console.error("Error updating user:", error);
@@ -31,10 +32,12 @@ router.put("/:id", async (req, res) => {
 });
 
 // Delete an existing user
-router.delete('/:id', async (req, res) => {
+router.delete('/:idNumber', async (req, res) => {
   try {
-    // Find the user by ID and delete it
-    const deletedUser = await User.findByIdAndDelete(req.params.id);
+    const idNumber = req.params.idNumber;
+
+    // Find the user by idNumber and delete it
+    const deletedUser = await User.findOneAndDelete({ idNumber });
 
     // Check if the user was found and deleted
     if (!deletedUser) {
@@ -49,6 +52,7 @@ router.delete('/:id', async (req, res) => {
     res.status(500).json({ message: 'An error occurred. Please try again later.' });
   }
 });
+
 
 // Get all users
 router.get("/", async (req, res) => {

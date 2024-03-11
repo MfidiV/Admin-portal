@@ -6,7 +6,6 @@ import { MdAutoDelete } from "react-icons/md";
 import { IoPersonAdd } from "react-icons/io5";
 import { GrUpdate } from "react-icons/gr";
 import { IoIosSearch } from "react-icons/io";
-import { FaUsersViewfinder } from "react-icons/fa6";
 import "../styles/dashboard.css";
 
 const Sidebar = () => {
@@ -45,10 +44,7 @@ const Sidebar = () => {
           Add user
         </a>
 
-        <a href="#" className='item'>
-          <FaUsersViewfinder className='ico'/>
-          view users
-        </a>
+       
         <a href="#" className='item'  onClick={handleDeleteUserClick}>
           <MdAutoDelete/>
           Delete
