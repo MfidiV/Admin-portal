@@ -17,6 +17,7 @@ router.post("/", async (req, res) => {
   }
 });
 
+
 // Update an existing user
 router.put("/:id", async (req, res) => {
   try {
@@ -30,16 +31,22 @@ router.put("/:id", async (req, res) => {
 });
 
 // Delete an existing user
-router.delete("/:id", async (req, res) => {
+router.delete('/:id', async (req, res) => {
   try {
+    // Find the user by ID and delete it
     const deletedUser = await User.findByIdAndDelete(req.params.id);
+
+    // Check if the user was found and deleted
     if (!deletedUser) {
-      return res.status(404).json({ message: "User not found" });
+      return res.status(404).json({ message: 'User not found' });
     }
-    res.json({ message: "User deleted successfully" });
+
+    // Return a success message if the user was deleted
+    res.json({ message: 'User deleted successfully' });
   } catch (error) {
-    console.error("Error deleting user:", error);
-    res.status(500).json({ message: "An error occurred. Please try again later." });
+    // Handle errors
+    console.error('Error deleting user:', error);
+    res.status(500).json({ message: 'An error occurred. Please try again later.' });
   }
 });
 

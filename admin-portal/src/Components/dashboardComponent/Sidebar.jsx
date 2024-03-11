@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import AddUser from '../Dashboard/Adduser';
+import DeleteUser from '../Dashboard/DeleteUsers';
 import { BiHome, BiBookAlt } from "react-icons/bi";
 import { MdAutoDelete } from "react-icons/md";
 import { IoPersonAdd } from "react-icons/io5";
@@ -9,15 +10,23 @@ import { FaUsersViewfinder } from "react-icons/fa6";
 import "../styles/dashboard.css";
 
 const Sidebar = () => {
-  const [showModal, setShowModal] = useState(false);
+  const [showAddUserModal, setShowAddUserModal] = useState(false);
+  const [showDeleteUserModal, setShowDeleteUserModal] = useState(false);
 
-  // Add user modal
   const handleAddUserClick = () => {
-    setShowModal(true);
+    setShowAddUserModal(true);
   };
 
-  const handleCloseModal = () => {
-    setShowModal(false);
+  const handleDeleteUserClick = () => {
+    setShowDeleteUserModal(true);
+  };
+
+  const handleCloseAddUserModal = () => {
+    setShowAddUserModal(false);
+  };
+
+  const handleCloseDeleteUserModal = () => {
+    setShowDeleteUserModal(false);
   };
 
   return (
@@ -35,11 +44,12 @@ const Sidebar = () => {
           <IoPersonAdd className='ico'/>
           Add user
         </a>
+
         <a href="#" className='item'>
           <FaUsersViewfinder className='ico'/>
           view users
         </a>
-        <a href="#" className='item'>
+        <a href="#" className='item'  onClick={handleDeleteUserClick}>
           <MdAutoDelete/>
           Delete
         </a>
@@ -53,13 +63,24 @@ const Sidebar = () => {
         </a>
       </div>
 
-      {showModal && (
+      {showAddUserModal && (
         <div className="modal">
           <div className="modal-content">
-            <span className="close" onClick={handleCloseModal}>
+            <span className="close" onClick={handleCloseAddUserModal}>
               &times;
             </span>
             <AddUser />
+          </div>
+        </div>
+      )}
+
+      {showDeleteUserModal && (
+        <div className="modal">
+          <div className="modal-content">
+            <span className="close" onClick={handleCloseDeleteUserModal}>
+              &times;
+            </span>
+            <DeleteUser />
           </div>
         </div>
       )}
