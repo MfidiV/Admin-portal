@@ -1,5 +1,8 @@
+// Sidebar.jsx
 import React, { useState } from 'react';
+// import axios from 'axios'
 import AddUser from '../Dashboard/Adduser';
+import AddAdmin from '../Dashboard/Admin/Admin/AddAdmin';
 import { BiHome, BiBookAlt } from "react-icons/bi";
 import { MdAutoDelete } from "react-icons/md";
 import { IoPersonAdd } from "react-icons/io5";
@@ -9,15 +12,20 @@ import { FaUsersViewfinder } from "react-icons/fa6";
 import "../styles/dashboard.css";
 
 const Sidebar = () => {
-  const [showModal, setShowModal] = useState(false);
+  const [showAddUserModal, setShowAddUserModal] = useState(false);
+  const [showAddAdminModal, setShowAddAdminModal] = useState(false);
 
-  // Add user modal
   const handleAddUserClick = () => {
-    setShowModal(true);
+    setShowAddUserModal(true);
+  };
+
+  const handleAddAdminClick = () => {
+    setShowAddAdminModal(true);
   };
 
   const handleCloseModal = () => {
-    setShowModal(false);
+    setShowAddUserModal(false);
+    setShowAddAdminModal(false);
   };
 
   return (
@@ -35,9 +43,14 @@ const Sidebar = () => {
           <IoPersonAdd className='ico'/>
           Add user
         </a>
+       
+        <a href="#" className='item' onClick={handleAddAdminClick}>
+          <IoPersonAdd className='ico'/>
+          Add admin
+        </a>
         <a href="#" className='item'>
           <FaUsersViewfinder className='ico'/>
-          view users
+          View users
         </a>
         <a href="#" className='item'>
           <MdAutoDelete/>
@@ -45,21 +58,32 @@ const Sidebar = () => {
         </a>
         <a href="#" className='item'>
           <GrUpdate className='ico'/>
-          updates
+          Updates
         </a>
         <a href="#" className='item'>
           <IoIosSearch className='ico'/>
-          search
+          Search
         </a>
       </div>
 
-      {showModal && (
+      {showAddUserModal && (
         <div className="modal">
           <div className="modal-content">
             <span className="close" onClick={handleCloseModal}>
               &times;
             </span>
             <AddUser />
+          </div>
+        </div>
+      )}
+
+      {showAddAdminModal && (
+        <div className="modal">
+          <div className="modal-content">
+            <span className="close" onClick={handleCloseModal}>
+              &times;
+            </span>
+            <AddAdmin handleCloseModal={handleCloseModal} />
           </div>
         </div>
       )}
