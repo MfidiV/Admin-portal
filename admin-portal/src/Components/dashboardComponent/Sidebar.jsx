@@ -6,18 +6,26 @@ import { IoPersonAdd } from "react-icons/io5";
 import { MdAutoDelete } from "react-icons/md";
 import AddUser from '../Dashboard/Adduser';
 import DeleteUser from '../Dashboard/DeleteUsers';
+import UserSearchComponent from '../Dashboard/UserSearchComponent';
 import "../styles/dashboard.css";
 
 const Sidebar = () => {
   const [showAddUserModal, setShowAddUserModal] = useState(false);
   const [showDeleteUserModal, setShowDeleteUserModal] = useState(false);
+  const [showUserSearchComponentModal, setShowUserSearchComponentModal] = useState(false);
 
   const handleAddUserClick = () => {
     setShowAddUserModal(true);
   };
 
+ 
+
   const handleDeleteUserClick = () => {
     setShowDeleteUserModal(true);
+  };
+
+  const handleUserSearchComponentClick = () => {
+    setShowUserSearchComponentModal(true);
   };
 
   const handleCloseAddUserModal = () => {
@@ -26,6 +34,10 @@ const Sidebar = () => {
 
   const handleCloseDeleteUserModal = () => {
     setShowDeleteUserModal(false);
+  };
+
+  const handleCloseUserSearchComponentModal = () => {
+    setShowUserSearchComponentModal(false);
   };
 
   return (
@@ -53,7 +65,7 @@ const Sidebar = () => {
           <GrUpdate className='ico'/>
           updates
         </a>
-        <a href="#" className='item'>
+        <a href="#" className='item'  onClick={handleUserSearchComponentClick}>
           <IoIosSearch className='ico'/>
           search
         </a>
@@ -80,6 +92,17 @@ const Sidebar = () => {
           </div>
         </div>
       )}
+
+      {showUserSearchComponentModal && (
+              <div className="modal">
+                <div className="modal-content">
+                  <span className="close" onClick={handleCloseUserSearchComponentModal}>
+                    &times;
+                  </span>
+                  <UserSearchComponent />
+                </div>
+              </div>
+            )}
     </div>
   );
 };

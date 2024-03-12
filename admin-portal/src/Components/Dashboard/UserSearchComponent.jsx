@@ -1,77 +1,75 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios'; // Assuming use of a library like Axios for API calls
+import axios from 'axios'; // Assuming you're using Axios for API calls
 
-function UserSearchComponent() {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [searchResults, setSearchResults] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
+const UserSearchComponent = () => {
+  const [searchQuery, setSearchQuery] = useState(''); // User's search input
+  const [searchResult, setSearchResult] = useState(null); // Holds the searched user information
+  const [error, setError] = useState(null); // Stores any errors
 
-  // Fetch all users initially (optional)
   useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        setIsLoading(true);
-        const response = await axios.get('/api/users'); // Adjust URL based on your backend setup
-        setSearchResults(response.data);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setIsLoading(false);
-      }
-    };
+    // Consider fetching all users on component mount for initial display
+    // const fetchData = async () => {
+    //   try {
+    //     const response = await axios.get('/api/users'); // Assuming your API endpoint
+    //     setUsers(response.data); // Example: storing all users if needed
+    //   } catch (error) {
+    //     console.error('Error fetching users:', error);
+    //   }
+    // };
+    // fetchData();
+  }, []); // Empty dependency array (optional for initial data fetch)
 
-    fetchUsers();
-  }, []);
+  const handleSearchChange = (event) => {
+    setSearchQuery(event.target.value);
+    setSearchResult(null); // Reset search result on new search
+    setError(null); // Clear previous error
+  };
 
   const handleSearch = async (event) => {
-    event.preventDefault();
+    event.preventDefault(); // Prevent default form submission behavior
 
-    if (!searchTerm) {
-      // Handle empty search case (optional: display a message or show all users)
-      return;
+    if (!searchQuery) {
+      setError('Please enter an ID number to search.');
+      return; // Early return if no search query
     }
 
     try {
-      setIsLoading(true);
-      const response = await axios.get(`/api/users?search=${searchTerm}`); // Adjust URL for search query
-      setSearchResults(response.data);
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setIsLoading(false);
+      const response = await axios.get(`/api/users/${searchQuery}`); // Assuming your API endpoint
+      setSearchResult(response.data); // Set the searched user information
+    } catch (error) {
+      setError(error.message || 'An error occurred while searching.');
     }
   };
 
   return (
     <div>
+      <h2>Search User</h2>
       <form onSubmit={handleSearch}>
-        <input
-          type="text"
-          placeholder="Search users..."
-          value={searchTerm}
-          onChange={(event) => setSearchTerm(event.target.value)}
-        />
+        <div>
+          <label htmlFor="searchId">ID Number:</label>
+          <input
+            type="text"
+            id="searchId"
+            value={searchQuery}
+            onChange={handleSearchChange}
+            required
+          />
+        </div>
         <button type="submit">Search</button>
       </form>
 
-      {isLoading && <p>Loading...</p>}
-      {error && <p>Error: {error}</p>}
-
-      {searchResults.length > 0 ? (
-        <ul>
-          {searchResults.map((user) => (
-            <li key={user.id}>
-              {/* Display relevant user information here */}
-              {user.name} - {user.email}
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p>No users found matching your search.</p>
+      {searchResult && (
+        <div>
+          <h4>Search Result</h4>
+          {/* Display user details here (assuming the response object has relevant properties) */}
+          <p>Name: {searchResult.name}</p>
+          <p>ID Number: {searchResult.idNumber}</p>
+          {/* Add more details as needed */}
+        </div>
       )}
+      {error && <p className="error-message">Error: {error}</p>}
     </div>
   );
-}
+};
 
 export default UserSearchComponent;
