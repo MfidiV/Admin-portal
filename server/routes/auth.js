@@ -1,6 +1,7 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
-const Admin = require('../models/admin');
+const bcrypt = require('bcrypt');
+const Admin = require('../models/admin.modal'); // Adjust the path as needed
 require('dotenv').config();
 
 const router = express.Router();
@@ -11,12 +12,17 @@ router.post('/login', async (req, res) => {
   try {
     const admin = await Admin.findOne({ email });
 
-    if (!email || admin.password !== password) {
+    if (!admin) {
+      return res.status(401).json({ message: 'Invalid email or password' });
+    }
+
+    const isPasswordValid = await bcrypt.compare(password, admin.password);
+
+    if (!isPasswordValid) {
       return res.status(401).json({ message: 'Invalid email or password' });
     }
 
     const token = jwt.sign({ id: admin._id }, process.env.SECRET_KEY, { expiresIn: '1h' });
-    // console.log(token);
 
     res.json({ message: 'Login successful', admin, token });
   } catch (error) {
