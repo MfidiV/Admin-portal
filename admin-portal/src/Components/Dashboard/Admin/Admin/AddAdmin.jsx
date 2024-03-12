@@ -4,6 +4,9 @@ import './AddAdmin.css';
 
 const AddAdmin = () => {
     const [newUser, setNewUser] = useState({
+        email: '',
+        username: '',
+        password: '',
         name: '',
         surname: '',
         birthdate: '',
@@ -19,6 +22,8 @@ const AddAdmin = () => {
         formData.append('name', newUser.name);
         formData.append('surname', newUser.surname);
         formData.append('role', newUser.role);
+        formData.append('email', newUser.email);
+        formData.append('password', newUser.password);
 
         axios.post('http://localhost:5000/admin/add/', formData)
              .then(res => {
@@ -39,51 +44,90 @@ const AddAdmin = () => {
 
     return (
         <div className="form-container">
-            <h2>Add New User</h2>
-            <form onSubmit={handleSubmit} encType='multipart/form-data'>
-                <input 
-                    type="file" 
-                    accept=".png, .jpg, .jpeg"
-                    name="photo"
-                    onChange={handlePhoto}
-                />
-
+            <h2> Save admin</h2>
+            <form className='adminForm'  onSubmit={handleSubmit} encType='multipart/form-data'>
+                
+                <div className='PersonalDetails'>
+                <label htmlFor="name">Name:</label>
                 <input 
                     type="text"
-                    placeholder="Name"
+                    id="name"
+                    placeholder="Enter name"
                     name="name"
                     value={newUser.name}
                     onChange={handleChange}
                 />
 
+                <label htmlFor="surname">Surname:</label>
                 <input 
                     type="text"
-                    placeholder="Surname"
+                    id="surname"
+                    placeholder="Enter surname"
                     name="surname"
                     value={newUser.surname}
                     onChange={handleChange}
                 />
-
+                <label htmlFor="birthdate">Birthdate:</label>
                 <input 
                     type="date"
+                    id="birthdate"
                     name="birthdate"
                     value={newUser.birthdate}
                     onChange={handleChange}
                 />
-
-                <select
-                    name="role"
-                    value={newUser.role}
-                    onChange={handleChange}
-                >
-                    <option value="full">Full Access</option>
-                    <option value="partial">Partial Access</option>
-                </select>
-
+                
+                <label htmlFor="photo">Photo:</label>
                 <input 
+                    type="file" 
+                    accept=".png, .jpg, .jpeg"
+                    id="photo"
+                    onChange={handlePhoto}
+                />
+                </div>
+                <div className='Security'>
+                    <label htmlFor="email">Email:</label>
+                    <input 
+                        type="email"
+                        id="email"
+                        placeholder="Enter email"
+                        name="email"
+                        value={newUser.email}
+                        onChange={handleChange}
+                    />
+                    
+
+                    <label htmlFor="password">Password:</label>
+                    <input 
+                        type="password"
+                        id="password"
+                        placeholder="Enter password"
+                        name="password"
+                        value={newUser.password}
+                        onChange={handleChange}
+                    />
+
+                    
+
+                    <label htmlFor="role">Role:</label>
+                    <select
+                        id="role"
+                        name="role"
+                        value={newUser.role}
+                        onChange={handleChange}
+                    >
+                        <option value="full">Full Access</option>
+                        <option value="partial">Partial Access</option>
+                    </select>
+
+                    <input 
                     type="submit"
                     value="Submit"
                 />
+                </div>
+
+                
+
+                
             </form>
         </div>
     );

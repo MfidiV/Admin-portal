@@ -4,6 +4,7 @@ const router = express.Router();
 const multer = require('multer');
 const { v4: uuidv4 } = require('uuid');
 const path = require('path');
+const bcrypt = require('bcrypt');
 const Admin = require('../models/admin.modal');
 
 // Multer configuration
@@ -20,26 +21,24 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 // Route to handle admin addition
-router.post('/add', upload.single('photo'), (req, res) => {
-    const { name, surname, birthdate, role } = req.body;
+router.post('/add', upload.single('photo'), async (req, res) => {
+    const { name, surname, email,  password, birthdate, role } = req.body;
     const photo = req.file.filename;
 
-    // Create a new Admin instance with the data
-    const newAdmin = new Admin({ name, surname, birthdate, photo, role });
+    try {
+        // Hash the password
+        const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Save the newAdmin instance to the database
-    newAdmin.save()
-        .then((admin) => {
-            res.status(201).json(admin); // Return the saved admin object as JSON
-        })
-        .catch(err => {
-            if (err.code === 11000 && err.keyPattern && err.keyPattern.hasOwnProperty('username')) {
-                // Handle duplicate key error for the 'username' field
-                res.status(400).json('Error: Username already exists.');
-            } else {
-                res.status(400).json('Error: ' + err);
-            }
-        });
+        // Create a new Admin instance with the data
+        const newAdmin = new Admin({ name, surname, email, password: hashedPassword, birthdate, photo, role });
+
+        // Save the newAdmin instance to the database
+        const admin = await newAdmin.save();
+
+        res.status(201).json(admin); // Return the saved admin object as JSON
+    } catch (err) {
+        res.status(400).json('Error: ' + err);
+    }
 });
 
 module.exports = router;
