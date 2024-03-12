@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import AddUser from '../Dashboard/Adduser';
-import DeleteUser from '../Dashboard/DeleteUsers';
-import { BiHome, BiBookAlt } from "react-icons/bi";
-import { MdAutoDelete } from "react-icons/md";
-import { IoPersonAdd } from "react-icons/io5";
+import { BiBookAlt, BiHome } from "react-icons/bi";
 import { GrUpdate } from "react-icons/gr";
 import { IoIosSearch } from "react-icons/io";
+import { IoPersonAdd } from "react-icons/io5";
+import { MdAutoDelete } from "react-icons/md";
+import AddUser from '../Dashboard/Adduser';
+import DeleteUser from '../Dashboard/DeleteUsers';
 import "../styles/dashboard.css";
 
 const Sidebar = () => {
