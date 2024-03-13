@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import * as jwtDecode from 'jwt-decode';
 import AddUser from '../Dashboard/Adduser';
 import AddAdmin from '../Dashboard/Admin/Admin/AddAdmin';
 import { BiHome, BiBookAlt } from "react-icons/bi";
@@ -13,14 +12,11 @@ import "../styles/dashboard.css";
 const Sidebar = () => {
   const [showAddUserModal, setShowAddUserModal] = useState(false);
   const [showAddAdminModal, setShowAddAdminModal] = useState(false);
-  const [userRole, setUserRole] = useState('');
-
+  
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
-      const decoded = jwtDecode(token);
-      setUserRole(decoded.role); // Extract and set user's role from JWT token
-      console.log(decoded.role); // Check the role in the console
+      // You can decode the token if needed
     }
   }, []);
 
@@ -53,12 +49,10 @@ const Sidebar = () => {
           Add user
         </a>
        
-        {userRole !== 'partial' && (
-          <a href="#" className='item' onClick={handleAddAdminClick}>
-            <IoPersonAdd className='ico'/>
-            Add admin
-          </a>
-        )}
+        <a href="#" className='item' onClick={handleAddAdminClick}>
+          <IoPersonAdd className='ico'/>
+          Add admin
+        </a>
 
         <a href="#" className='item'>
           <FaUsersViewfinder className='ico'/>

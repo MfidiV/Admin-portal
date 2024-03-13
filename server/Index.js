@@ -7,6 +7,7 @@ const cors = require('cors');
 const authRoutes = require('./routes/auth');
 const userRoutes = require("./routes/userRoutes");
  const adminRoutes = require('./routes/adminRoutes');
+ const path = require('path'); // Import the path module
 
 
 const app = express();
@@ -28,6 +29,7 @@ app.use("/api/users", userRoutes);
 
 
 app.use('/admin', adminRoutes);
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 
 

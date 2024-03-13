@@ -1,3 +1,4 @@
+// Login.js
 import React, { useState } from 'react';
 import axios from 'axios';
 import { FaUser, FaKey } from 'react-icons/fa';
@@ -11,17 +12,21 @@ function Login() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-  
+
     try {
       const response = await axios.post('http://localhost:5000/api/login', {
         email,
         password,
       });
-  
+
       if (response.status === 200) {
         console.log("Login successful");
-        // Navigate to Home component
+        const { admin, token} = response.data;
+        localStorage.setItem('token', token);
+        localStorage.setItem('adminName', admin.name);
+        localStorage.setItem('photo',admin.photo)
         navigate('/dashboard');
+        console.log(response)
       } else {
         setError("Invalid username or password");
         throw new Error('Login failed');
