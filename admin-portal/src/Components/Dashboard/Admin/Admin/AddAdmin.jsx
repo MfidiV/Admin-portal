@@ -14,6 +14,8 @@ const AddAdmin = () => {
         role: 'full', // Default role to 'Full Access'
     });
 
+    const [showSuccessModal, setShowSuccessModal] = useState(false);
+
     const handleSubmit = (e) => {
         e.preventDefault();
         const formData = new FormData();
@@ -28,6 +30,7 @@ const AddAdmin = () => {
         axios.post('http://localhost:5000/admin/add/', formData)
              .then(res => {
                 console.log(res);
+                setShowSuccessModal(true); // Show success modal on successful submission
              })
              .catch(err => {
                 console.log(err);
@@ -40,6 +43,10 @@ const AddAdmin = () => {
 
     const handlePhoto = (e) => {
         setNewUser({...newUser, photo: e.target.files[0]});
+    }
+
+    const closeModal = () => {
+        setShowSuccessModal(false);
     }
 
     return (
@@ -129,6 +136,16 @@ const AddAdmin = () => {
 
                 
             </form>
+            {showSuccessModal && (
+        <div className="success-modal">
+          <div className="success-modal-content">
+            <span className="close" onClick={closeModal}>
+              &times;
+            </span>
+            <p>User added successfully!</p>
+          </div>
+        </div>
+      )}
         </div>
     );
 }
