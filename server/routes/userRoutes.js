@@ -53,22 +53,34 @@ router.delete('/:idNumber', async (req, res) => {
   }
 });
 
-// search for users
-router.get('/search/:idNumber', async (req, res) => {
+
+// Get all users
+router.get("/", async (req, res) => {
+  try {
+    const users = await User.find({});
+    res.json(users);
+  } catch (error) {
+    console.error("Error fetching users:", error);
+    res.status(500).json({ message: "An error occurred. Please try again later." });
+  }
+});
+
+router.get("/search/:idNumber", async (req, res) => {
   try {
     const idNumber = req.params.idNumber;
-    const user = await User.findOne({ idNumber }); // Assuming your Mongoose model
+
+    // Find the user by idNumber
+    const user = await User.findOne({ idNumber });
 
     if (!user) {
       return res.status(404).json({ message: "User not found." });
     }
 
-    res.json(user); // Send back the searched user information
+    res.json(user);
   } catch (error) {
     console.error("Error searching for user:", error);
     res.status(500).json({ message: "An error occurred. Please try again later." });
   }
 });
-
 
 module.exports = router;

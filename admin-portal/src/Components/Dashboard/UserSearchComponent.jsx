@@ -8,15 +8,15 @@ const UserSearchComponent = () => {
 
   useEffect(() => {
     // Consider fetching all users on component mount for initial display
-    // const fetchData = async () => {
-    //   try {
-    //     const response = await axios.get('/api/users'); // Assuming your API endpoint
-    //     setUsers(response.data); // Example: storing all users if needed
-    //   } catch (error) {
-    //     console.error('Error fetching users:', error);
-    //   }
-    // };
-    // fetchData();
+     const fetchData = async () => {
+     try {
+        const response = await axios.get('http://localhost:5000/api/users/${userId}'); // Assuming your API endpoint
+         setUsers(response.data); // Example: storing all users if needed
+      } catch (error) {
+        console.error('Error fetching users:', error);
+      }
+     };
+     fetchData();
   }, []); // Empty dependency array (optional for initial data fetch)
 
   const handleSearchChange = (event) => {
@@ -34,7 +34,7 @@ const UserSearchComponent = () => {
     }
 
     try {
-      const response = await axios.get(`/api/users/${searchQuery}`); // Assuming your API endpoint
+      const response = await axios.get(`http://localhost:5000/api/users/${userId}`); // Assuming your API endpoint
       setSearchResult(response.data); // Set the searched user information
     } catch (error) {
       setError(error.message || 'An error occurred while searching.');
@@ -54,7 +54,7 @@ const UserSearchComponent = () => {
             onChange={handleSearchChange}
             required
           />
-        </div>
+        </div> 
         <button type="submit">Search</button>
       </form>
 
