@@ -1,17 +1,21 @@
+// ContentHeader.jsx
 import React, { useEffect, useState } from 'react';
 import { BiSearch } from 'react-icons/bi';
 import '../styles/ContentHeader.css';
 
 const ContentHeader = () => {
-  const [adminPhoto, setAdminPhoto] = useState('');
+  const [imageSrc, setImageSrc] = useState(null);
 
   useEffect(() => {
-    const photo = localStorage.getItem('photo');
-    if (photo) {
-      // Construct the URL for the image based on the photo string
-      setAdminPhoto(`/uploads/${photo}`);
+    // Retrieve the imageName from local storage
+    const storedImageName = localStorage.getItem('photo');
+
+    // Load the image dynamically using import()
+    if (storedImageName) {
+      // Fetch the image directly from the backend
+      setImageSrc(`http://localhost:5000/uploads/${storedImageName}`);
     }
-  }, []); // Empty dependency array to run the effect only once when the component mounts
+  }, []); 
 
   return (
     <div className='content--header'>
@@ -22,7 +26,8 @@ const ContentHeader = () => {
           <BiSearch className='ico'/>
         </div>
         <div className='notify'>
-          {adminPhoto && <img src={adminPhoto} alt="Admin" height="50" width="50" />} {/* Render admin photo if available */}
+          {/* Render the image using the imageSrc state */}
+          {imageSrc && <img src={imageSrc} alt="Admin" height="50" width="50" />}
         </div>
       </div>
     </div>

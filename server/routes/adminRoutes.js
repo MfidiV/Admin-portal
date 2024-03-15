@@ -8,41 +8,7 @@ const bcrypt = require('bcrypt');
 const Admin = require('../models/admin.modal');
 const jwt = require('jsonwebtoken'); // Import jwt module
 
-// Multer configuration
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, 'uploads/');
-    },
-    filename: function (req, file, cb) {
-        const uniqueSuffix = uuidv4();
-        cb(null, uniqueSuffix + '-' + Date.now() + path.extname(file.originalname));
-    }
-});
-
-const upload = multer({ storage: storage });
-
-// Route to handle admin addition
-
-router.post('/add', upload.single('photo'), async (req, res) => {
-    const { name, surname, email,  password, birthdate, role } = req.body;
-    const photo = req.file.filename;
-
-    try {
-        // Hash the password
-        const hashedPassword = await bcrypt.hash(password, 10);
-
-        // Create a new Admin instance with the data
-        const newAdmin = new Admin({ name, surname, email, password: hashedPassword, birthdate, photo, role });
-
-        // Save the newAdmin instance to the database
-        const admin = await newAdmin.save();
-
-        res.status(201).json(admin); // Return the saved admin object as JSON
-    } catch (err) {
-        res.status(400).json('Error: ' + err);
-    }
-});
-
+// Middleware to verify token and fetch admin information
 const verifyTokenAndFetchAdmin = async (req, res, next) => {
     const token = req.headers.authorization;
     if (!token) {
@@ -74,6 +40,40 @@ const verifyTokenAndFetchAdmin = async (req, res, next) => {
         res.status(500).json({ message: 'An error occurred. Please try again later.' });
     }
 };
+
+// Multer configuration
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, '/uploads/');
+    },
+    filename: function (req, file, cb) {
+        const uniqueSuffix = uuidv4();
+        cb(null, uniqueSuffix + '-' + Date.now() + path.extname(file.originalname));
+    }
+});
+
+const upload = multer({ storage: storage });
+
+// Route to handle admin addition
+router.post('/add', upload.single('photo'), async (req, res) => {
+    const { name, surname, email, password, birthdate, role } = req.body;
+    const photo = req.file.filename;
+
+    try {
+        // Hash the password
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        // Create a new Admin instance with the data
+        const newAdmin = new Admin({ name, surname, email, password: hashedPassword, birthdate, photo, role });
+
+        // Save the newAdmin instance to the database
+        const admin = await newAdmin.save();
+
+        res.status(201).json(admin); // Return the saved admin object as JSON
+    } catch (err) {
+        res.status(400).json('Error: ' + err);
+    }
+});
 
 // Route to get admin information
 router.get('/admin', verifyTokenAndFetchAdmin, (req, res) => {
