@@ -12,11 +12,12 @@ import "../styles/dashboard.css";
 const Sidebar = () => {
   const [showAddUserModal, setShowAddUserModal] = useState(false);
   const [showAddAdminModal, setShowAddAdminModal] = useState(false);
-  
+  const [isFullRole, setIsFullRole] = useState(false);
+
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      // You can decode the token if needed
+    const role = localStorage.getItem('role');
+    if (role === 'full') {
+      setIsFullRole(true);
     }
   }, []);
 
@@ -49,10 +50,12 @@ const Sidebar = () => {
           Add user
         </a>
        
-        <a href="#" className='item' onClick={handleAddAdminClick}>
-          <IoPersonAdd className='ico'/>
-          Add admin
-        </a>
+        {isFullRole && ( // Render the "Add admin" button only if the role is "full"
+          <a href="#" className='item' onClick={handleAddAdminClick}>
+            <IoPersonAdd className='ico'/>
+            Add admin
+          </a>
+        )}
 
         <a href="#" className='item'>
           <FaUsersViewfinder className='ico'/>

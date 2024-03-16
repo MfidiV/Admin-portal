@@ -25,6 +25,7 @@ function Login() {
         localStorage.setItem('token', token);
         localStorage.setItem('adminName', admin.name);
         localStorage.setItem('photo',admin.photo)
+        localStorage.setItem('role',admin.role)
         navigate('/dashboard');
         console.log(response)
       } else {
