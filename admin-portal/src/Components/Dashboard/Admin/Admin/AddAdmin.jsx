@@ -5,7 +5,6 @@ import './AddAdmin.css';
 const AddAdmin = () => {
     const [newUser, setNewUser] = useState({
         email: '',
-        username: '',
         password: '',
         name: '',
         surname: '',
@@ -27,14 +26,16 @@ const AddAdmin = () => {
         formData.append('email', newUser.email);
         formData.append('password', newUser.password);
 
-        axios.post('http://localhost:5000/admin/add/', formData)
-             .then(res => {
+        console.log(formData);
+
+        axios.post('http://localhost:5000/api/admins/add', formData) // Updated the URL to match backend route
+            .then(res => {
                 console.log(res);
-                setShowSuccessModal(true); // Show success modal on successful submission
-             })
-             .catch(err => {
+                setShowSuccessModal(true);
+            })
+            .catch(err => {
                 console.log(err);
-             });
+            });
     }
 
     const handleChange = (e) => {
