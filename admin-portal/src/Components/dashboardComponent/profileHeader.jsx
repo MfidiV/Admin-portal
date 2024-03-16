@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { BsChevronDown } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom'; // Uncomment if needed
 import '../styles/profileHeader.css';
@@ -24,9 +24,26 @@ const ProfileHeader = () => {
         // Redirect to login component page
         navigate('/login'); // Uncomment if needed
     };
+    const [imageSrc, setImageSrc] = useState(null);
+
+    useEffect(() => {
+      // Retrieve the imageName from local storage
+      const storedImageName = localStorage.getItem('photo');
+  
+      // Load the image dynamically using import()
+      if (storedImageName) {
+        // Fetch the image directly from the backend
+        setImageSrc(`http://localhost:5000/uploads/${storedImageName}`);
+      }
+    }, []); 
+  
 
     return (
         <div className="profile-header">
+            <div className='notify'>
+          {/* Render the image using the imageSrc state */}
+          {imageSrc && <img src={imageSrc} alt="Admin" height="30" width="20" />}
+        </div>
             <h2 className='header-title'>{adminName}</h2>
             <div className='dropdown'>
                 <div className="dropdown-toggle" onClick={toggleDropdown}>
