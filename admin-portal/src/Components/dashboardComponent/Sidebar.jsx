@@ -57,10 +57,7 @@ const Sidebar = () => {
           </a>
         )}
 
-        <a href="#" className='item'>
-          <FaUsersViewfinder className='ico'/>
-          View users
-        </a>
+  
         <a href="#" className='item'>
           <MdAutoDelete/>
           Delete
