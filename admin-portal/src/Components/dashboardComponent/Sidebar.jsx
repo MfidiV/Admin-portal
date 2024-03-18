@@ -1,23 +1,43 @@
 import React, { useState } from 'react';
-import AddUser from '../Dashboard/Adduser';
-import { BiHome, BiBookAlt } from "react-icons/bi";
-import { MdAutoDelete } from "react-icons/md";
-import { IoPersonAdd } from "react-icons/io5";
+import { BiBookAlt, BiHome } from "react-icons/bi";
 import { GrUpdate } from "react-icons/gr";
 import { IoIosSearch } from "react-icons/io";
-import { FaUsersViewfinder } from "react-icons/fa6";
+import { IoPersonAdd } from "react-icons/io5";
+import { MdAutoDelete } from "react-icons/md";
+import AddUser from '../Dashboard/Adduser';
+import DeleteUser from '../Dashboard/DeleteUsers';
+import UserSearchComponent from '../Dashboard/UserSearchComponent';
 import "../styles/dashboard.css";
 
 const Sidebar = () => {
-  const [showModal, setShowModal] = useState(false);
+  const [showAddUserModal, setShowAddUserModal] = useState(false);
+  const [showDeleteUserModal, setShowDeleteUserModal] = useState(false);
+  const [showUserSearchComponentModal, setShowUserSearchComponentModal] = useState(false);
 
-  // Add user modal
   const handleAddUserClick = () => {
-    setShowModal(true);
+    setShowAddUserModal(true);
   };
 
-  const handleCloseModal = () => {
-    setShowModal(false);
+ 
+
+  const handleDeleteUserClick = () => {
+    setShowDeleteUserModal(true);
+  };
+
+  const handleUserSearchComponentClick = () => {
+    setShowUserSearchComponentModal(true);
+  };
+
+  const handleCloseAddUserModal = () => {
+    setShowAddUserModal(false);
+  };
+
+  const handleCloseDeleteUserModal = () => {
+    setShowDeleteUserModal(false);
+  };
+
+  const handleCloseUserSearchComponentModal = () => {
+    setShowUserSearchComponentModal(false);
   };
 
   return (
@@ -35,11 +55,9 @@ const Sidebar = () => {
           <IoPersonAdd className='ico'/>
           Add user
         </a>
-        <a href="#" className='item'>
-          <FaUsersViewfinder className='ico'/>
-          view users
-        </a>
-        <a href="#" className='item'>
+
+       
+        <a href="#" className='item'  onClick={handleDeleteUserClick}>
           <MdAutoDelete/>
           Delete
         </a>
@@ -47,22 +65,44 @@ const Sidebar = () => {
           <GrUpdate className='ico'/>
           updates
         </a>
-        <a href="#" className='item'>
+        <a href="#" className='item'  onClick={handleUserSearchComponentClick}>
           <IoIosSearch className='ico'/>
           search
         </a>
       </div>
 
-      {showModal && (
+      {showAddUserModal && (
         <div className="modal">
           <div className="modal-content">
-            <span className="close" onClick={handleCloseModal}>
+            <span className="close" onClick={handleCloseAddUserModal}>
               &times;
             </span>
             <AddUser />
           </div>
         </div>
       )}
+
+      {showDeleteUserModal && (
+        <div className="modal">
+          <div className="modal-content">
+            <span className="close" onClick={handleCloseDeleteUserModal}>
+              &times;
+            </span>
+            <DeleteUser />
+          </div>
+        </div>
+      )}
+
+      {showUserSearchComponentModal && (
+              <div className="modal">
+                <div className="modal-content">
+                  <span className="close" onClick={handleCloseUserSearchComponentModal}>
+                    &times;
+                  </span>
+                  <UserSearchComponent />
+                </div>
+              </div>
+            )}
     </div>
   );
 };
