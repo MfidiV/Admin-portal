@@ -42,7 +42,7 @@ const UserSearchComponent = () => {
         <div>
           <h3>User Found</h3>
           <p>Name: {searchResult.name}</p>
-          <p>ID Number: {searchResult.idNumber}</p>
+          <p>Email: {searchResult.email}</p>
           {/* Add more details as needed */}
         </div>
       )}
